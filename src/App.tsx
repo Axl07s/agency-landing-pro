@@ -1,5 +1,4 @@
-import React from 'react';
-import { ArrowRight, CheckCircle2, Building, Users, BarChart3 } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 export default function App() {
   return (
