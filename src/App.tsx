@@ -160,19 +160,19 @@ export default function App() {
           {/* Quick Metrics Bar */}
           <div className="pt-16 grid grid-cols-2 md:grid-cols-4 gap-6 border-t border-zinc-800/80 text-left">
             <div>
-              <span className="text-2xl sm:text-3xl font-bold tracking-tight text-white block">$18.4M+</span>
+              <span className="text-2xl sm:text-3xl font-bold tracking-tight text-white block">{t.hero.metrics.pipelineValue}</span>
               <span className="text-xs text-zinc-500 font-mono uppercase">{t.hero.metrics.pipelineLabel}</span>
             </div>
             <div>
-              <span className="text-2xl sm:text-3xl font-bold tracking-tight text-white block">14 Días</span>
+              <span className="text-2xl sm:text-3xl font-bold tracking-tight text-white block">{t.hero.metrics.timeValue}</span>
               <span className="text-xs text-zinc-500 font-mono uppercase">{t.hero.metrics.timeLabel}</span>
             </div>
             <div>
-              <span className="text-2xl sm:text-3xl font-bold tracking-tight text-white block">28.4%</span>
+              <span className="text-2xl sm:text-3xl font-bold tracking-tight text-white block">{t.hero.metrics.closeRateValue}</span>
               <span className="text-xs text-zinc-500 font-mono uppercase">{t.hero.metrics.closeRateLabel}</span>
             </div>
             <div>
-              <span className="text-2xl sm:text-3xl font-bold tracking-tight text-white block">Zero Waste</span>
+              <span className="text-2xl sm:text-3xl font-bold tracking-tight text-white block">{t.hero.metrics.filteringValue}</span>
               <span className="text-xs text-zinc-500 font-mono uppercase">{t.hero.metrics.filteringLabel}</span>
             </div>
           </div>

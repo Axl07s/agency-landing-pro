@@ -16,9 +16,13 @@ export interface TranslationContent {
     ctaPrimary: string;
     ctaSecondary: string;
     metrics: {
+      pipelineValue: string;
       pipelineLabel: string;
+      timeValue: string;
       timeLabel: string;
+      closeRateValue: string;
       closeRateLabel: string;
+      filteringValue: string;
       filteringLabel: string;
     };
   };
@@ -128,9 +132,13 @@ export const translations: Record<Language, TranslationContent> = {
       ctaPrimary: 'Calculate Live ROI',
       ctaSecondary: 'Start Growth Audit (3 Min)',
       metrics: {
+        pipelineValue: '$18.4M+',
         pipelineLabel: 'Pipeline Generated',
+        timeValue: '14 Days',
         timeLabel: 'Time-to-Production',
+        closeRateValue: '28.4%',
         closeRateLabel: 'Avg Win Rate',
+        filteringValue: 'Zero Waste',
         filteringLabel: 'Algorithmic Filtering',
       },
     },
@@ -295,9 +303,13 @@ export const translations: Record<Language, TranslationContent> = {
       ctaPrimary: 'Calcular ROI en Vivo',
       ctaSecondary: 'Iniciar Diagnóstico (3 Min)',
       metrics: {
+        pipelineValue: '$18.4M+',
         pipelineLabel: 'Pipeline Generado',
+        timeValue: '14 Días',
         timeLabel: 'Time-to-Production',
+        closeRateValue: '28.4%',
         closeRateLabel: 'Tasa Promedio Cierre',
+        filteringValue: 'Zero Waste',
         filteringLabel: 'Filtrado Algorítmico',
       },
     },
