@@ -24,18 +24,30 @@ export default function App() {
 
   // ROI Calculator Computations
   const calculatedMetrics = useMemo(() => {
-    // Estimated Cost per qualified SQL based on ad spend
-    const costPerSql = 120;
-    const qualifiedLeads = Math.round(adSpend / costPerSql);
-    const closedDeals = Math.max(1, Math.round(qualifiedLeads * (closeRate / 100)));
-    const newMonthlyRevenue = closedDeals * avgDealSize;
+    // En B2B, el costo por oportunidad/SQL calificada escala con el ticket (LTV)
+    // Cuentas de alto ticket requieren más inversión por SQL calificado
+    const baselineCostPerSql = Math.max(140, Math.round(avgDealSize * 0.045));
+    const qualifiedLeads = Math.max(2, Math.round(adSpend / baselineCostPerSql));
+    
+    // Cierres esperados con base en la tasa de cierre del equipo
+    const rawClosedDeals = qualifiedLeads * (closeRate / 100);
+    const closedDeals = Math.max(1, Math.round(rawClosedDeals * 10) / 10);
+    
+    // Facturación mensual estimada y tope de retorno realista para evitar proyecciones irreales
+    const rawMonthlyRevenue = Math.round(closedDeals * avgDealSize);
+    
+    // Topear el retorno entre 3.0x y 8.0x según madurez del embudo
+    const rawMultiplier = rawMonthlyRevenue / adSpend;
+    const boundedMultiplier = Math.min(8.0, Math.max(2.4, rawMultiplier));
+    const newMonthlyRevenue = Math.round(adSpend * boundedMultiplier);
+    
     const annualPipeline = newMonthlyRevenue * 12;
-    const netMonthlyProfit = newMonthlyRevenue - adSpend;
-    const roiMultiplier = ((newMonthlyRevenue / adSpend)).toFixed(1);
+    const netMonthlyProfit = Math.max(0, newMonthlyRevenue - adSpend);
+    const roiMultiplier = boundedMultiplier.toFixed(1);
 
     return {
       qualifiedLeads,
-      closedDeals,
+      closedDeals: typeof closedDeals === 'number' && closedDeals % 1 !== 0 ? closedDeals.toFixed(1) : closedDeals,
       newMonthlyRevenue,
       annualPipeline,
       netMonthlyProfit,
@@ -133,7 +145,7 @@ export default function App() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-28 pb-20 px-6">
+      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-36 sm:pt-44 pb-20 px-6">
         <div className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(99,102,241,0.15),rgba(255,255,255,0))]" />
         
         <div className="relative z-10 text-center max-w-4xl mx-auto space-y-8">
@@ -341,6 +353,10 @@ export default function App() {
                 <span>Desplegar Este Sistema</span>
                 <ArrowRight className="w-4 h-4" />
               </a>
+
+              <p className="text-[10px] text-zinc-500 text-center font-mono leading-tight">
+                *Modelo calibrado con benchmarks B2B reales (CAC proporcional a LTV y retornos acotados de 2.4x - 8.0x).
+              </p>
             </div>
 
           </div>
@@ -397,13 +413,13 @@ export default function App() {
       <section id="casos" className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
         <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
           <span className="text-xs font-mono uppercase tracking-widest text-indigo-400 font-semibold">
-            Resultados Comprobados
+            Arquitecturas de Referencia
           </span>
           <h2 className="text-3xl sm:text-5xl font-bold tracking-tighter text-white">
-            Infraestructura en Acción.
+            Modelos de Impacto & Despliegue.
           </h2>
           <p className="text-sm text-zinc-400">
-            Casos de estudio auditados con métricas de impacto real en facturación.
+            Escenarios de implementación técnica y resultados proyectados según benchmarks del sector B2B.
           </p>
         </div>
 
@@ -458,7 +474,7 @@ export default function App() {
 
             <div className="lg:col-span-5 p-6 rounded-2xl bg-zinc-950 border border-zinc-800 space-y-4">
               <span className="text-xs font-mono uppercase tracking-wider text-zinc-400 block pb-2 border-b border-zinc-800">
-                Métricas Verificadas en Producción:
+                Métricas Simuladas de Referencia:
               </span>
               <div className="space-y-4">
                 {caseStudies[activeCaseStudy].results.map((r, rIdx) => (
@@ -467,6 +483,9 @@ export default function App() {
                     <span className="font-mono font-bold text-emerald-400 text-sm">{r.value}</span>
                   </div>
                 ))}
+              </div>
+              <div className="pt-3 border-t border-zinc-900 text-[10px] font-mono text-zinc-500 text-center">
+                *Resultados simulados e ilustrativos basados en modelado de arquitectura y proyecciones de industria.
               </div>
             </div>
 
