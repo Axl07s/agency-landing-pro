@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://agency-landing-pro-ruddy.vercel.app/projects/nexus_01.png" alt="NexusCorp B2B Funnel" width="100%" />
+  <img src="https://raw.githubusercontent.com/Axl07s/portfolio-axel/master/public/projects/nexus_01.png" alt="NexusCorp B2B Funnel" width="100%" />
 
   # NexusCorp B2B Agency
   **B2B Client Acquisition Engine & Real-Time ROI Calculator**
@@ -41,4 +41,5 @@ NexusCorp is a sophisticated B2B lead generation infrastructure designed for hig
 <div align="center">
   <i>Engineered for production by <a href="https://github.com/Axl07s">Axel Molineros</a>.</i>
 </div>
+
 
