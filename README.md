@@ -39,5 +39,6 @@ NexusCorp is a sophisticated B2B lead generation infrastructure designed for hig
 - **Language:** TypeScript
 
 <div align="center">
-  <i>Engineered for production by <a href="https://axel.dev">Axel Molineros</a>.</i>
+  <i>Engineered for production by <a href="https://github.com/Axl07s">Axel Molineros</a>.</i>
 </div>
+
