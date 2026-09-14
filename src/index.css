@@ -1,2 +1,13 @@
 @tailwind base; @tailwind components; @tailwind utilities;
 body { background-color: #f8fafc; color: #0f172a; }
+
+/* MOBILE PRO-MAX OPTIMIZATIONS */
+@media (hover: none) and (pointer: coarse) {
+  button:active, a:active { transform: scale(0.98); transition: transform 0.1s; }
+}
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+html {
+  scroll-behavior: smooth;
+}
