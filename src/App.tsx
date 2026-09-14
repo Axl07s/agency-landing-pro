@@ -7,8 +7,23 @@ import {
 import { translations, type Language } from './translations';
 
 export default function App() {
-  // Language state (defaulting to English for international portfolios & Vercel)
-  const [lang, setLang] = useState<Language>('en');
+  // Language state with automatic browser detection (ES/EN) and localStorage persistence
+  const [lang, setLangState] = useState<Language>(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('app_lang');
+      if (saved === 'en' || saved === 'es') return saved;
+      return navigator.language.toLowerCase().startsWith('es') ? 'es' : 'en';
+    }
+    return 'en';
+  });
+
+  const setLang = (newLang: Language) => {
+    setLangState(newLang);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('app_lang', newLang);
+    }
+  };
+
   const t = translations[lang];
 
   // ROI Calculator State
