@@ -190,7 +190,7 @@ export default function App() {
             <span>{t.hero.badge}</span>
           </div>
 
-          <h1 className="text-5xl sm:text-7xl font-bold tracking-tighter text-white leading-[1.08]">
+          <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold tracking-tighter text-white leading-[1.08]">
             {t.hero.titleMain} <br />
             <span className="text-zinc-500">{t.hero.titleSub}</span>
           </h1>
@@ -343,7 +343,7 @@ export default function App() {
             </div>
 
             {/* Right Output Dashboard (5 cols) */}
-            <div className="lg:col-span-5 p-8 sm:p-10 rounded-3xl bg-zinc-950 border border-indigo-500/30 space-y-6 shadow-xl relative overflow-hidden">
+            <div className="lg:col-span-5 p-5 sm:p-10 rounded-3xl bg-zinc-950 border border-indigo-500/30 space-y-6 shadow-xl relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
               
               <div className="flex items-center justify-between pb-4 border-b border-zinc-800">
@@ -359,7 +359,7 @@ export default function App() {
                 <span className="text-xs text-zinc-500 font-mono uppercase tracking-wider">
                   {t.simulator.revenueLabel}
                 </span>
-                <div className="text-4xl sm:text-5xl font-bold tracking-tight text-white font-mono">
+                <div className="text-2xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white font-mono break-words">
                   ${calculatedMetrics.newMonthlyRevenue.toLocaleString()} <span className="text-sm font-normal text-zinc-400">{t.simulator.perMonth}</span>
                 </div>
               </div>
