@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react';
 import { 
   ArrowRight, CheckCircle2, BarChart3, ChevronDown, 
   TrendingUp, Shield, Layers, Zap, Calculator, Sliders, 
-  Sparkles
+  Sparkles, Menu, X
 } from 'lucide-react';
 import { translations, type Language } from './translations';
 
@@ -25,6 +25,7 @@ export default function App() {
   };
 
   const t = translations[lang];
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // ROI Calculator State
   const [adSpend, setAdSpend] = useState<number>(5000);
@@ -129,12 +130,54 @@ export default function App() {
 
             <a 
               href="#diagnostico"
-              className="px-5 py-2.5 rounded-full bg-white hover:bg-zinc-200 text-black text-xs font-bold uppercase tracking-wider transition-all shadow-lg"
+              className="hidden sm:inline-flex px-5 py-2.5 rounded-full bg-white hover:bg-zinc-200 text-black text-xs font-bold uppercase tracking-wider transition-all shadow-lg min-h-[44px] items-center"
             >
               {t.nav.auditCta}
             </a>
+
+            {/* Mobile Hamburger Button */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden p-2 rounded-full border border-zinc-800 bg-zinc-900 text-zinc-300 hover:text-white min-h-[44px] min-w-[44px] flex items-center justify-center transition-colors"
+              aria-label="Abrir menú"
+            >
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
           </div>
         </div>
+
+        {/* Mobile Drawer */}
+        {mobileMenuOpen && (
+          <div className="md:hidden bg-zinc-950/98 backdrop-blur-2xl border-b border-zinc-800/80 px-6 py-6 space-y-4 animate-fadeIn shadow-2xl">
+            <div className="space-y-1">
+              {[
+                { href: '#simulador', label: t.nav.simulator },
+                { href: '#arquitectura', label: t.nav.architecture },
+                { href: '#casos', label: t.nav.cases },
+                { href: '#diagnostico', label: t.nav.audit },
+              ].map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center min-h-[48px] px-3 rounded-xl text-sm font-semibold tracking-wider uppercase text-zinc-300 hover:text-indigo-400 hover:bg-zinc-900/60 transition-colors"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+
+            <div className="pt-4 border-t border-zinc-800/80">
+              <a 
+                href="#diagnostico"
+                onClick={() => setMobileMenuOpen(false)}
+                className="w-full py-3.5 px-4 rounded-full text-center text-xs font-bold uppercase tracking-wider bg-white hover:bg-zinc-200 text-black min-h-[48px] flex items-center justify-center shadow-lg"
+              >
+                {t.nav.auditCta}
+              </a>
+            </div>
+          </div>
+        )}
       </nav>
 
       {/* Hero Section */}
